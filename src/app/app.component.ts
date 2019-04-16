@@ -1,31 +1,123 @@
-import { Component } from '@angular/core';
+import { Component, Directive, EventEmitter, Input, Output, QueryList, ViewChildren } from '@angular/core';
+
+interface User {
+  firstname: string;
+  lastname: string;
+}
+interface Country {
+  id: number;
+  name: string;
+  flag: string;
+  area: number;
+  population: number;
+  user: User
+}
+
+const COUNTRIES: Country[] = [
+  {
+    id: 1,
+    name: 'Russia',
+    flag: 'f/f3/Flag_of_Russia.svg',
+    area: 17075200,
+    population: 146989754,
+    user: {
+      firstname: 'malick',
+      lastname: 'DIOP'
+    }
+  },
+  {
+    id: 2,
+    name: 'Canada',
+    flag: 'c/cf/Flag_of_Canada.svg',
+    area: 9976140,
+    population: 36624199,
+    user: {
+      firstname: 'malick',
+      lastname: 'DIOP'
+    }
+  },
+  {
+    id: 3,
+    name: 'United States',
+    flag: 'a/a4/Flag_of_the_United_States.svg',
+    area: 9629091,
+    population: 324459463,
+    user: {
+      firstname: 'Louis',
+      lastname: 'Diattz'
+    }
+  },
+  {
+    id: 4,
+    name: 'China',
+    flag: 'f/fa/Flag_of_the_People%27s_Republic_of_China.svg',
+    area: 9596960,
+    population: 1409517397,
+    user: {
+      firstname: 'Ben',
+      lastname: 'Vers'
+    }
+  }
+];
+
+export type SortDirection = 'asc' | 'desc' | '';
+const rotate: {[key: string]: SortDirection} = { 'asc': 'desc', 'desc': '', '': 'asc' };
+export const compare = (v1, v2) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
+
+export interface SortEvent {
+  column: string;
+  direction: SortDirection;
+}
+
+@Directive({
+  selector: 'th[sortable]',
+  host: {
+    '[class.asc]': 'direction === "asc"',
+    '[class.desc]': 'direction === "desc"',
+    '(click)': 'rotate()'
+  }
+})
+export class NgbdSortableHeader {
+
+  @Input() sortable: string;
+  @Input() direction: SortDirection = '';
+  @Output() sort = new EventEmitter<SortEvent>();
+
+  rotate() {
+    this.direction = rotate[this.direction];
+    this.sort.emit({column: this.sortable, direction: this.direction});
+  }
+}
 
 @Component({
   selector: 'app-root',
-  template: `
-    <!--The content below is only a placeholder and can be replaced.-->
-    <div style="text-align:center">
-      <h1>
-        Welcome to {{title}}!
-      </h1>
-      <img width="300" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-    </div>
-    <h2>Here are some links to help you start: </h2>
-    <ul>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-      </li>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-      </li>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-      </li>
-    </ul>
-    <router-outlet></router-outlet>
-  `,
-  styles: []
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   title = 'angular-ng-boostrap-table';
+
+  countries = COUNTRIES;
+
+  @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
+
+  onSort({column, direction}: SortEvent) {
+
+    // resetting other headers
+    this.headers.forEach(header => {
+      if (header.sortable !== column) {
+        header.direction = '';
+      }
+    });
+
+    // sorting countries
+    if (direction === '') {
+      this.countries = COUNTRIES;
+    } else {
+      this.countries = [...COUNTRIES].sort((a, b) => {
+        const res = compare(a[column], b[column]);
+        return direction === 'asc' ? res : -res;
+      });
+    }
+  }
 }
