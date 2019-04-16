@@ -21,7 +21,6 @@ export interface SortEvent {
 })
 export class NgbdSortableHeaderDirective {
 
-
   @Input() sortable: string;
   @Input() direction: SortDirection = '';
   @Output() sort = new EventEmitter<SortEvent>();

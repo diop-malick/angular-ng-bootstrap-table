@@ -6,5 +6,5 @@ export class Country {
     flag: string;
     area: number;
     population: number;
-    user: User
+    user: User;
 }
