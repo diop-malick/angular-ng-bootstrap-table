@@ -1,15 +1,24 @@
 <div class="container">
 
-    <p>You can introduce custom directives for table headers to sort columns</p>
+    <p>{{title}}</p>
 
     <table class="table table-striped">
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col" sortable="name" (sort)="onSort($event)">Country</th>
-            <th scope="col" sortable="area" (sort)="onSort($event)">Area</th>
-            <th scope="col" sortable="population" (sort)="onSort($event)">Population</th>
-            <th scope="col" sortable="user.firstName" (sort)="onSort($event)">User</th>
+            <th scope="col" sortable="name" (sort)="onSort($event)">
+                Country <fa-icon [icon]="['fas', 'sort']"></fa-icon>
+            </th>
+            <th scope="col" sortable="area" (sort)="onSort($event)">
+                Area <fa-icon [icon]="['fas', 'sort']"></fa-icon>
+            </th>
+            <th scope="col" sortable="population" (sort)="onSort($event)">
+                Population
+                <fa-icon [icon]="['fas', 'sort']"></fa-icon>
+            </th>
+            <th scope="col" sortable="user.firstName" (sort)="onSort($event)">
+                User <fa-icon [icon]="['fas', 'sort']"></fa-icon>
+            </th>
         </tr>
         </thead>
         <tbody>

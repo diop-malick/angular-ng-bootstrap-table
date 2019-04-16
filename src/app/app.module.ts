@@ -10,6 +10,10 @@ import {TableTwoComponent} from './table-two/table-two.component';
 import {AppService} from "./app.service";
 import {NgbdSortableHeaderDirective} from './ngbd-sortable-header.directive';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faSort, faSearch } from '@fortawesome/free-solid-svg-icons';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,9 +24,15 @@ import {NgbdSortableHeaderDirective} from './ngbd-sortable-header.directive';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    FontAwesomeModule
   ],
   providers: [AppService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor() {
+    library.add(faSort);
+    library.add(faSearch);
+  }
+}
