@@ -10,8 +10,12 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - [x] add sort on nested properties
 - [x] add font awesome
 - [x] add sort icon
+- [x] adapt icon by direction / color icon on sorted column
 - [ ] add two table
-- [ ] add paginating (with mock service refactoring)
+- [ ] add date tri
+- [ ] add paginating in one table(make it optional/ with mock service refactoring)
+- [ ] Search and filtering
+- [ ] Complete example (simulates server calling)
 - [ ] refactor
 
 ## IDEA
@@ -22,3 +26,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 - https://ng-bootstrap.github.io/#/components/table/overview
 - https://github.com/FortAwesome/angular-fontawesome
+
+## Notes
+
+Meilleur approche : paginer/sort en back, et renvoyez les résultats en front, déclencher l'appel à chaque tri 

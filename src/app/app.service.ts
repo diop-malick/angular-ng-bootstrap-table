@@ -14,4 +14,24 @@ export class AppService {
   getCountries(): Observable<Country[]> {
     return of(COUNTRIES);
   }
+
+  /**
+   * @see http://blog.nicohaemhouts.com/2015/08/03/accessing-nested-javascript-objects-with-string-key/
+   * @param theObject
+   * @param path
+   * @param separator
+   */
+  getNested (theObject, path, separator = '.') {
+    try {
+      return path
+          .replace('[', separator).replace(']','')
+          .split(separator)
+          .reduce((obj, property) => {
+                return obj[property];
+              }, theObject
+          );
+    } catch (err) {
+      return undefined;
+    }
+  }
 }
