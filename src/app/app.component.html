@@ -19,6 +19,9 @@
             <th scope="col" sortable="user.firstName" (sort)="onSort($event)">
                 User <fa-icon [icon]="['fas', 'sort']"></fa-icon>
             </th>
+            <th scope="col" sortable="user.address.city" (sort)="onSort($event)">
+                User <fa-icon [icon]="['fas', 'sort']"></fa-icon>
+            </th>
         </tr>
         </thead>
         <tbody>
@@ -31,6 +34,8 @@
             <td>{{ country.area | number }}</td>
             <td>{{ country.population | number }}</td>
             <td>{{ country.user.firstName }} {{ country.user.lastName }}</td>
+            <td>{{ country.user.address.city }} </td>
+
         </tr>
         </tbody>
     </table>

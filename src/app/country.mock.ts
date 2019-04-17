@@ -9,7 +9,10 @@ export const COUNTRIES: Country[] = [
         population: 14,
         user: {
             firstName: 'malick',
-            lastName: 'DIOP'
+            lastName: 'DIOP',
+            address: {
+                city : 'paris'
+            }
         }
     },
     {
@@ -20,7 +23,10 @@ export const COUNTRIES: Country[] = [
         population: 36,
         user: {
             firstName: 'malick',
-            lastName: 'DIOP'
+            lastName: 'DIOP',
+            address: {
+                city : 'paris'
+            }
         }
     },
     {
@@ -31,7 +37,10 @@ export const COUNTRIES: Country[] = [
         population: 32,
         user: {
             firstName: 'Louis',
-            lastName: 'Diattz'
+            lastName: 'Diatta',
+            address: {
+                city : 'lille'
+            }
         }
     },
     {
@@ -42,7 +51,10 @@ export const COUNTRIES: Country[] = [
         population: 14,
         user: {
             firstName: 'Ben',
-            lastName: 'Vers'
+            lastName: 'Vers',
+            address: {
+                city : 'marseille'
+            }
         }
     }
 ];
