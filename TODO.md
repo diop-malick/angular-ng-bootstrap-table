@@ -11,7 +11,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - [x] add font awesome
 - [x] add sort icon
 - [x] adapt icon by direction / color icon on sorted column
-- [ ] add two table
+- [x] add two table
+- [x] refactor with ng-jhipster approach
 - [ ] add date tri
 - [ ] add paginating in one table(make it optional/ with mock service refactoring)
 - [ ] Search and filtering
@@ -25,8 +26,12 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Resources
 
 - https://ng-bootstrap.github.io/#/components/table/overview
+
 - https://github.com/FortAwesome/angular-fontawesome
+
+- https://github.com/jhipster/ng-jhipster
+
 
 ## Notes
 
-Meilleur approche : paginer/sort en back, et renvoyez les résultats en front, déclencher l'appel à chaque tri 
+Best practice : pagination & sort on backend, trigger new http call in each sort click
