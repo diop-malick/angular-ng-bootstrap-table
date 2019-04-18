@@ -13,13 +13,19 @@ import {NgbdSortableHeaderDirective} from './ngbd-sortable-header.directive';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSort, faSearch } from '@fortawesome/free-solid-svg-icons';
+import {JhiSortByDirective} from "./sort/sort-by.directive";
+import {JhiSortDirective} from "./sort/sort.directive";
+import {JhiOrderByPipe} from "./sort/order-by.pipe";
+// import {JhiOrderByPipe} from "./sort/order-by.pipe";
 
 @NgModule({
   declarations: [
     AppComponent,
     TableOneComponent,
     TableTwoComponent,
-    NgbdSortableHeaderDirective
+    NgbdSortableHeaderDirective,
+    JhiSortByDirective,
+    JhiSortDirective
   ],
   imports: [
     BrowserModule,
@@ -27,7 +33,7 @@ import { faSort, faSearch } from '@fortawesome/free-solid-svg-icons';
     NgbModule,
     FontAwesomeModule
   ],
-  providers: [AppService],
+  providers: [AppService, JhiOrderByPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {

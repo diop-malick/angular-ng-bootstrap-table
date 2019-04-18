@@ -8,6 +8,7 @@ export const COUNTRIES: Country[] = [
         area: 17,
         population: 14,
         user: {
+            id: 2,
             firstName: 'malick',
             lastName: 'DIOP',
             address: {
@@ -22,6 +23,7 @@ export const COUNTRIES: Country[] = [
         area: 99,
         population: 36,
         user: {
+            id: 2,
             firstName: 'malick',
             lastName: 'DIOP',
             address: {
@@ -36,6 +38,7 @@ export const COUNTRIES: Country[] = [
         area: 96,
         population: 32,
         user: {
+            id: 3,
             firstName: 'Louis',
             lastName: 'Diatta',
             address: {
@@ -50,6 +53,7 @@ export const COUNTRIES: Country[] = [
         area: 95,
         population: 14,
         user: {
+            id: 4,
             firstName: 'Ben',
             lastName: 'Vers',
             address: {
