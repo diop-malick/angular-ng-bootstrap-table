@@ -25,7 +25,8 @@ import {JhiOrderByPipe} from "./sort/order-by.pipe";
     TableTwoComponent,
     NgbdSortableHeaderDirective,
     JhiSortByDirective,
-    JhiSortDirective
+    JhiSortDirective,
+    JhiOrderByPipe
   ],
   imports: [
     BrowserModule,

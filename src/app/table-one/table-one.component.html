@@ -1,42 +1,47 @@
 <div class="container">
 
-  <p>{{title}}</p>
+    <p>{{title}}</p>
 
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col" sortable="name" (sort)="onSort($event)">
-        Country <fa-icon [icon]="['fas', 'sort']"></fa-icon>
-      </th>
-      <th scope="col" sortable="area" (sort)="onSort($event)">
-        Area <fa-icon [icon]="['fas', 'sort']"></fa-icon>
-      </th>
-      <th scope="col" sortable="population" (sort)="onSort($event)">
-        Population
-        <fa-icon [icon]="['fas', 'sort']"></fa-icon>
-      </th>
-      <th scope="col" sortable="user.firstName" (sort)="onSort($event)">
-        User <fa-icon [icon]="['fas', 'sort']"></fa-icon>
-      </th>
-      <th scope="col" sortable="user.address.city" (sort)="onSort($event)">
-        User <fa-icon [icon]="['fas', 'sort']"></fa-icon>
-      </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let country of countries">
-      <th scope="row">{{ country.id }}</th>
-      <td>
-        <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2" style="width: 20px">
-        {{ country.name }}
-      </td>
-      <td>{{ country.area | number }}</td>
-      <td>{{ country.population | number }}</td>
-      <td>{{ country.user.firstName }} {{ country.user.lastName }}</td>
-      <td>{{ country.user.address.city }} </td>
+    <table class="table table-striped">
+        <thead>
+        <tr [(ascending)]="reverse" [(predicate)]="predicate" [callback]="onSort.bind(this)" jhiSort>
+            <th scope="col">#</th>
+            <th jhiSortBy="name" scope="col">
+                Country
+                <fa-icon [icon]="'sort'"></fa-icon>
+            </th>
+            <th jhiSortBy="area" scope="col">
+                Area
+                <fa-icon [icon]="'sort'"></fa-icon>
+            </th>
+            <th jhiSortBy="population" scope="col">
+                Population
+                <fa-icon [icon]="'sort'"></fa-icon>
+            </th>
+            <th jhiSortBy="user.firstName" scope="col">
+                User
+                <fa-icon [icon]="'sort'"></fa-icon>
+            </th>
+            <th jhiSortBy="user.address.city" scope="col">
+                User
+                <fa-icon [icon]="'sort'"></fa-icon>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let country of countries">
+            <th scope="row">{{ country.id }}</th>
+            <td>
+                <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2"
+                     style="width: 20px">
+                {{ country.name }}
+            </td>
+            <td>{{ country.area | number }}</td>
+            <td>{{ country.population | number }}</td>
+            <td>{{ country.user.firstName }} {{ country.user.lastName }}</td>
+            <td>{{ country.user.address.city }} </td>
 
-    </tr>
-    </tbody>
-  </table>
+        </tr>
+        </tbody>
+    </table>
 </div>

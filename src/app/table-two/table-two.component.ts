@@ -11,14 +11,13 @@ import {JhiOrderByPipe} from "../sort/order-by.pipe";
   styleUrls: ['./table-two.component.scss']
 })
 export class TableTwoComponent implements OnInit {
-  title = 'USERS with jhipster sort';
+
+  title = 'USERS';
 
   users: User[];
 
   predicate: any;
   reverse: any;
-
-  @ViewChildren(NgbdSortableHeaderDirective) headers: QueryList<NgbdSortableHeaderDirective>;
 
   constructor(private appService: AppService, private orderByPipe: JhiOrderByPipe) {
     this.users = [];
@@ -35,11 +34,7 @@ export class TableTwoComponent implements OnInit {
         .subscribe(users => this.users = users);
   }
 
-  reset() {
-    console.log('================ callback reset');
-    console.log('this.predicate | column = ' + this.predicate);
-    console.log('this.reverse | direction =' + this.reverse);
-
+  onSort() {
     this.users = this.orderByPipe.transform(this.users,this.predicate,this.reverse);
   }
 

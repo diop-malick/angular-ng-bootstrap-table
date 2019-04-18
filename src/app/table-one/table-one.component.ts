@@ -1,53 +1,39 @@
-import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Country} from "../country.model";
-import {compare, NgbdSortableHeaderDirective, SortEvent} from "../ngbd-sortable-header.directive";
 import {AppService} from "../app.service";
+import {JhiOrderByPipe} from "../sort/order-by.pipe";
 
 @Component({
-  selector: 'app-table-one',
-  templateUrl: './table-one.component.html',
-  styleUrls: ['./table-one.component.scss']
+    selector: 'app-table-one',
+    templateUrl: './table-one.component.html',
+    styleUrls: ['./table-one.component.scss']
 })
 export class TableOneComponent implements OnInit {
 
-  title = 'angular-ng-boostrap-table';
+    title = 'COUNTRIES';
 
-  countries: Country[];
+    countries: Country[];
 
-  @ViewChildren(NgbdSortableHeaderDirective) headers: QueryList<NgbdSortableHeaderDirective>;
+    predicate: any;
+    reverse: any;
 
-  constructor(private appService: AppService) { }
-
-  ngOnInit() {
-    this.getCountries();
-  }
-
-  getCountries(): void {
-    this.appService.getCountries()
-        .subscribe(countries => this.countries = countries);
-  }
-
-  onSort({column, direction}: SortEvent) {
-
-    // resetting other headers
-    this.headers.forEach(header => {
-      if (header.sortable !== column) {
-        header.direction = '';
-      }
-    });
-
-    // sorting countries
-    if (direction === '') {
-      this.countries = this.countries;
-    } else {
-      this.countries = this.countries.sort((a, b) => {
-        const res = compare(
-            this.appService.getNested(a, column),
-            this.appService.getNested(b, column)
-        );
-        return direction === 'asc' ? res : -res;
-      });
+    constructor(private appService: AppService, private orderByPipe: JhiOrderByPipe) {
+        this.countries = [];
+        this.predicate = 'id';
+        this.reverse = true;
     }
-  }
+
+    ngOnInit() {
+        this.getCountries();
+    }
+
+    getCountries(): void {
+        this.appService.getCountries()
+            .subscribe(countries => this.countries = countries);
+    }
+
+    onSort() {
+        this.countries = this.orderByPipe.transform(this.countries, this.predicate, this.reverse);
+    }
 
 }

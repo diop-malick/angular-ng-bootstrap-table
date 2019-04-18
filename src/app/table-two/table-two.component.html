@@ -1,32 +1,36 @@
 <div class="container">
 
-  <p>{{title}}</p>
+    <p>{{title}}</p>
 
-  <table class="table table-striped">
-    <thead>
-    <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
-      <th scope="col" jhiSortBy="id">
-        # <fa-icon [icon]="'sort'"></fa-icon>
-      </th>
-      
-      <th scope="col" jhiSortBy="firstName">
-        Country <fa-icon [icon]="'sort'"></fa-icon>
-      </th>
-      <th scope="col" jhiSortBy="lastName">
-        Area <fa-icon [icon]="'sort'"></fa-icon>
-      </th>
-      <th scope="col" jhiSortBy="address.city">
-        User <fa-icon [icon]="'sort'"></fa-icon>
-      </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let user of users">
-      <th scope="row">{{ user.id }}</th>
-      <td>{{ user.firstName }}</td>
-      <td>{{ user.lastName }}</td>
-      <td>{{ user.address.city }} </td>
-    </tr>
-    </tbody>
-  </table>
+    <table class="table table-striped">
+        <thead>
+        <tr [(ascending)]="reverse" [(predicate)]="predicate" [callback]="onSort.bind(this)" jhiSort>
+            <th jhiSortBy="id" scope="col">
+                #
+                <fa-icon [icon]="'sort'"></fa-icon>
+            </th>
+
+            <th jhiSortBy="firstName" scope="col">
+                Country
+                <fa-icon [icon]="'sort'"></fa-icon>
+            </th>
+            <th jhiSortBy="lastName" scope="col">
+                Area
+                <fa-icon [icon]="'sort'"></fa-icon>
+            </th>
+            <th jhiSortBy="address.city" scope="col">
+                User
+                <fa-icon [icon]="'sort'"></fa-icon>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of users">
+            <th scope="row">{{ user.id }}</th>
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.address.city }} </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
